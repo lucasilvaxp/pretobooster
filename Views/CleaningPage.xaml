@@ -1,0 +1,129 @@
+<UserControl x:Class="PretoBoost.Views.CleaningPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="900"
+             Background="Transparent">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,25">
+            <TextBlock Text="LIMPEZA" Style="{StaticResource TitleTextStyle}"/>
+            <TextBlock Text="Limpe sua unidade do sistema" 
+                       FontSize="14" Foreground="#666666" Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Content -->
+        <Border Grid.Row="1" Style="{StaticResource CardPanel}" VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column -->
+                <StackPanel Grid.Column="0" Margin="0,0,30,0">
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="Limpar Temp" 
+                              IsChecked="{Binding CleanTemp, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="Windows + IIS logs" 
+                              IsChecked="{Binding CleanWindowsLogs, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="Prefetch cache" 
+                              IsChecked="{Binding CleanPrefetch, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="BSOD Minidumps" 
+                              IsChecked="{Binding CleanMinidumps, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="Error reports" 
+                              IsChecked="{Binding CleanErrorReports, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                </StackPanel>
+
+                <!-- Right Column -->
+                <StackPanel Grid.Column="1">
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="Empty Recycle Bin" 
+                              IsChecked="{Binding EmptyRecycleBin, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="Media Players cache" 
+                              IsChecked="{Binding CleanMediaCache, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="uTorrent cache" 
+                              IsChecked="{Binding CleanUTorrent, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="FileZilla recent servers" 
+                              IsChecked="{Binding CleanFileZilla, Mode=TwoWay}"
+                              Margin="0,0,0,15"/>
+                    
+                    <CheckBox Style="{StaticResource ModernCheckBox}" 
+                              Content="Select All" 
+                              IsChecked="{Binding SelectAll, Mode=TwoWay}"
+                              Command="{Binding SelectAllCommand}"
+                              Margin="0,0,0,15"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Status and Button -->
+        <StackPanel Grid.Row="2" Margin="0,25,0,0">
+            <!-- Status Message -->
+            <TextBlock Text="{Binding StatusMessage}" 
+                       FontSize="13" 
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#888888"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsCleaning}" Value="True">
+                                <Setter Property="Foreground" Value="#00D4FF"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <!-- Clean Button -->
+            <Button x:Name="CleanButton"
+                    Content="Clean" 
+                    Command="{Binding CleanCommand}"
+                    HorizontalAlignment="Center"
+                    Width="200">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource ActionButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsCleaning}" Value="True">
+                                <Setter Property="Content" Value="Limpando..."/>
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

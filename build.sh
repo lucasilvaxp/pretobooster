@@ -1,0 +1,21 @@
+#!/bin/bash
+echo "========================================"
+echo "   PretoBoost 2.0 - Build Script"
+echo "========================================"
+echo ""
+
+# Este script é para referência - o build real deve ser feito no Windows
+echo "NOTA: Este projeto WPF deve ser compilado no Windows."
+echo ""
+echo "Comandos para executar no Windows:"
+echo ""
+echo "1. Restaurar dependências:"
+echo "   dotnet restore"
+echo ""
+echo "2. Build em Release:"
+echo "   dotnet build -c Release"
+echo ""
+echo "3. Publicar executável único:"
+echo "   dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true"
+echo ""
+echo "========================================"
